@@ -1,41 +1,32 @@
 # MyWoman
 
-MyWoman is a digital product that helps women set goals, access curated resources, and connect with mentors and peer groups. It is built to be simple, trustworthy, and locally relevant.
-
-## What MyWoman does
-MyWoman helps users:
-- Track personal goals such as savings, learning milestones, or health checkups.
-- Discover curated resources like guides, local service providers, and learning content.
-- Connect with vetted mentors and small community groups for support and accountability.
+## What the product does
+MyWoman is an online platform designed to support new mothers facing postpartum depression. It gives them a safe space to connect with other moms, share experiences, and seek emotional help through easy-to-use features and professional support.
 
 ## Why it matters
-Many women do not have easy access to tailored resources or trusted mentorship. MyWoman provides an accessible, low-friction way to find support and track progress. The product focuses on usability and local relevance.
+Every year, many new mothers silently struggle with depression and anxiety after childbirth. MyWoman creates a community where they can talk freely, feel understood, and find comfort in knowing they’re not alone, thanks to its supportive community and access to professional counselling. 
 
 ## Who it is for
-Primary users:
-- Women starting or growing small businesses
-- Students and young professionals looking for mentorship and resources
-- Community groups organizing shared goals and savings
+MyWoman is built for:
+- New mothers experiencing postpartum depression or loneliness.
+- Experienced mothers who want to support others.
+- Mental health volunteers and professionals offering guidance and counselling.
 
 ## Key features
-- Personal goals dashboard
-- Targeted resource library
-- Group and mentor connections
-- Simple onboarding and localized content
+- **Community Circles:** Join or create groups to connect with other mothers.
+- **MomSupport:** Book sessions with professionals, volunteer listeners, or experienced moms.
+- **Mood Check:** Reflect on daily emotions and receive personalized tips.
+- **MomAid:** Find support, calming exercises, and tips to help you through tough moments.
+- **DearMom (Diary):** Write private journal entries and track mental health progress.
+- **Anonymous Mode:** Choose to stay unidentified while sharing experiences.
 
-## Key technologies
-- Frontend: React (or React Native for mobile)
-- Backend: Node.js with Express
-- Database: PostgreSQL
-- Authentication: JWT
-- File storage: Amazon S3 or equivalent
-- Deployment: Vercel or Render for frontend, Heroku or Render for backend
+## Technologies Used
+- **Frontend:** React Native (for mobile interface)
+- **Backend:** Node.js with Express (for handling user requests)
+- **Database:** Firebase (for real-time storage and authentication)
+- **Authentication:** Firebase Auth (for secure sign-ins)
+- **File Storage:** Firebase Storage (for user uploads and diary entries)
+- **Cloud Services:** Google Cloud for hosting and notifications
 
-## How to run locally
-1. Clone this repo  
-2. `cd mywoman`  
-3. Follow instructions in `SYSTEM_ARCHITECTURE.md` for service setup
-
-## Contact
-If you want to contribute or test MyWoman, open an issue or send a pull request on this repository.
-# MyWoman
+## Vision
+To build a warm, safe, and inclusive space where mothers can freely express their feelings and receive the emotional support they need.

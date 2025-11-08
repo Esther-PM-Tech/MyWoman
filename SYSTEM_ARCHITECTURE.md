@@ -1,79 +1,83 @@
-# MyWoman - System Architecture
+#  System Architecture - MyWoman
 
 ## Overview
-This document describes the technical architecture for MyWoman. It outlines the frontend, backend, database, and how components communicate. The goal is a modular, maintainable system that can be deployed incrementally.
+MyWoman is designed as a mobile-first web application that focuses on emotional support, community interaction, and access to mental health resources for new mothers.
 
-## High level components
-1. Frontend
-   - React web app for browsers.
-   - Optionally React Native for mobile.
-   - Responsibilities: UI, input validation, client-side routing, basic offline handling.
+---
 
-2. Backend API
-   - Node.js with Express.
-   - REST endpoints for authentication, user profile, goals, resources, groups.
-   - Business logic lives here.
+## 1. Frontend Architecture
+- **Framework:** React Native
+- **Purpose:** To create a simple and intuitive mobile interface.
+- **Key Components:**
+  - Registration and Login Screens
+  - Homepage Dashboard
+  - Community Circles Page
+  - Mood Check Page
+  - Diary page (DearMom)
+  - MomSupport Booking Interface
+  - MomAid Quick Access Panel
+  - Anonymous Mode Toggle (available across relevant pages)
+- **UI Libraries:** Tailwind CSS or Material UI for clean and consistent design.
 
-3. Database
-   - PostgreSQL for relational data: users, goals, groups, transactions.
-   - Use migrations with a tool like Knex or Prisma.
+---
 
-4. File storage
-   - Amazon S3 or any object store for profile images and attachments.
+## 2. Backend Architecture
+- **Framework:** Node.js with Express
+- **Purpose:** Handles authentication, data processing, and API routing via REST endpoints.
+- **Key Functions:**
+  - Validating user data during sign-up and login.
+  - Ensures secure authentication, including password hashing and safe session handling
+  - Managing chat and community interactions (including Anonymous Mode)
+  - Scheduling and managing counselling sessions (MomSupport)
+  - Storing and retrieving diary entries securely (DearMom)
+  - Recording, retrieving, and analyzing Mood Check data to provide personalized recommendations
+  - Ensuring users can access MomAid resources and exercises for quick emotional support
 
-5. Authentication & security
-   - JWT for session tokens.
-   - Passwords hashed with bcrypt.
-   - Rate limiting and input validation on critical endpoints.
-   - HTTPS enforced in production.
+---
 
-6. Devops / Deployment
-   - Frontend: Vercel or Netlify.
-   - Backend: Render or Heroku.
-   - Database: Managed Postgres (Heroku Postgres, RDS, or Supabase).
-   - CI: GitHub Actions for tests and deploy.
+## 3. Database
+- **Type:** Firebase Firestore (NoSQL database)
+- **Data Stored:**
+  - User profiles and authentication tokens (with support for Anonymous Mode)
+  - User-uploaded files such as profile pictures or diary attachments (stored securely in Firebase Storage)
+  - Community posts and private chats.
+  - Diary entries (DearMom)
+  - Mood logs and reflection data (Mood Check)
+  - Counselling session schedules and bookings (MomSupport)
+  - MomAid resources and exercises
+- **Security:** Firebase Authentication ensures only verified users can access or update their data.
 
-## Component interaction
-- The frontend calls the backend API over HTTPS.
-- The backend queries the PostgreSQL database for persistent data.
-- For file uploads, frontend uploads to the backend which signs S3 uploads, or uploads directly with presigned URLs.
-- Notifications: use a worker queue (Bull with Redis) to send emails, push or SMS via providers.
+---
 
-## API examples
-- `POST /api/auth/register` -> register user
-- `POST /api/auth/login` -> returns JWT
-- `GET /api/users/:id/goals` -> returns user goals
-- `POST /api/goals` -> create a target goal
+## 4. Component Communication
+- **Frontend and Backend:** Communicate through RESTful APIs.
+- **Data Flow:**
+  - The frontend sends requests via HTTPS to the backend.
+  - Backend interacts with Firebase to store or fetch data for:
+  - Community posts and chats (Community Circles)
+  - Counselling session bookings and professional/volunteer info (MomSupport)
+  - Mood logs and reflections (Mood Check)
+  - Diary entries (DearMom)
+  - MomAid resources and exercises
+  - Responses are sent back to the frontend in JSON format.
+- **Anonymous Mode:** Backend handles anonymization when users choose to stay unidentified.
+- **Real-time Updates:** Firebase enables instant updates in chats and community posts.
 
-## Data model (high level)
-- User: id, name, email, phone, country, password_hash, created_at
-- Goal: id, user_id, title, description, target_amount, frequency, start_date, end_date
-- Group: id, name, type, admin_id
-- Resource: id, title, url, category
+---
 
-## Scalability and performance
-- Start with a single web instance and managed DB.  
-- Use caching for high read endpoints with Redis.  
-- Use background jobs for heavy tasks like sending emails or generating reports.
+## 5. Technical Feasibility
+This structure is:
+- **Scalable:** Firebase allows the app to handle many users, communities, and counselling sessions without server overload (supports Community Circles and MomSupport).
+- **Secure:** Authentication and cloud-based storage protect private diary entries, mood logs, and user identities (supports DearMom, Mood Check, and Anonymous Mode).
+- **Cost-efficient:** Using cloud services reduces hosting and maintenance costs while delivering features like MomAid resources and real-time updates.
+- **User-friendly:** The React Native interface ensures accessibility even for non-technical users.
 
-## Security considerations
-- Input validation and sanitization at backend.
-- Secure storage of secrets using environment variables.
-- Limit rate for authentication endpoints to prevent brute force.
+---
 
-## Feasibility and roadmap
-- Phase 1: Minimal viable product with core onboarding, goal creation, and resource browsing.
-- Phase 2: Groups, mentors, file uploads, scheduling.
-- Phase 3: Analytics, localization and offline sync.
-
-## Optional diagrams
-You can add a diagram here. Example Mermaid diagram:
-
-```mermaid
-graph TD
-  Client[Frontend React] -->|HTTPS| API[Node.js API]
-  API --> DB[Postgres]
-  API --> S3[File Storage]
-  API --> Queue[Redis/Bull]
-  Queue --> Worker[Background Worker]
-  Worker --> Email[Email / SMS Provider]
+## 6. Future Improvements
+- AI-powered mood insights: Provide personalized tips and track emotional trends (Mood Check).
+- Integration with telehealth services: Enable faster access to professionals and volunteers (MomSupport).
+- Voice-based journaling: Allow mothers to record thoughts and reflections instead of typing (DearMom).
+- Smart Community features: Suggest relevant circles or connections and improve moderation (Community Circles).
+- Enhanced MomAid: Deliver personalized exercises and support based on user needs.
+- Improved privacy options: Strengthen Anonymous Mode and other data protection measures.
