@@ -96,15 +96,15 @@ This structure is:
 │          │                                                  │
 │          ▼                                                  │
 │  ┌───────────────────────────────┐                          │
-│  │ Navigation & Dashboard         │                         │
+│  │ Navigation & Dashboard        │                          │
 │  │ - Displays multiple cards     │                          │
 │  │ - Stats, counts, figures      │                          │
 │  └───────────────────────────────┘                          │
 │      │            │            │                            │
 │      ▼            ▼            ▼                            │
 │  ┌─────────┐   ┌─────────┐   ┌─────────────┐                │
-│  │ MoodCheck│  │Community│  │ MomSupport   │                │
-│  │  Page    │  │  Page   │  │  Page        │                │
+│  │MoodCheck│   │Community│   │ MomSupport  │                │
+│  │ Page    │   │  Page   │   │  Page       │                │
 │  └─────────┘   └─────────┘   └─────────────┘                │
 │      ▲             ▲            ▲                           │
 │      │             │            │                           │
