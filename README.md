@@ -1,7 +1,5 @@
 # MyWoman
 
-<img src="./image/MyWoman.png">
-
 ## What the product does
 MyWoman is an online platform designed to support new mothers facing postpartum depression. It gives them a safe space to connect with other moms, share experiences, and seek emotional help through easy-to-use features and professional support.
 
@@ -13,6 +11,8 @@ MyWoman is built for:
 - New mothers experiencing postpartum depression or loneliness.
 - Experienced mothers who want to support others.
 - Mental health volunteers and professionals offering guidance and counselling.
+
+<img src="./image/MyWoman.png">
 
 ## Key features
 - **Community Circles:** Join or create groups to connect with other mothers.
