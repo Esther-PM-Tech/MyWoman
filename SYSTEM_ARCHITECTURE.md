@@ -81,3 +81,56 @@ This structure is:
 - Smart Community features: Suggest relevant circles or connections and improve moderation (Community Circles).
 - Enhanced MomAid: Deliver personalized exercises and support based on user needs.
 - Improved privacy options: Strengthen Anonymous Mode and other data protection measures.
+
+---
+
+## 7. Architecture Diagram
+┌───────────────────────────────────────────────────────────────────────┐
+│                          MYWOMAN MOBILE APP                            │
+│                      (React Native Frontend)                          │
+│                                                                       │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌──────────────┐ │
+│  │ Login/Signup│  │Community    │  │Mood Check   │  │ DearMom Diary │ │
+│  │   Module    │  │ Circles     │  │ Module      │  │   Module      │ │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └──────────────┘ │
+│         │                │                │                 │          │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌────────────┐ │
+│  │ MomSupport   │  │ MomAid Quick │  │ Profile      │  │ Anonymous  │ │
+│  │  Booking     │  │  Access      │  │ Module       │  │ Mode Toggle│ │
+│  └──────────────┘  └──────────────┘  └──────────────┘  └────────────┘ │
+│         │                │                │                 │          │
+│         └────────────────┴────────────────┴─────────────────┘          │
+│                           │                                           │
+│                HTTPS/REST API Calls                                   │
+└───────────────────────────┬───────────────────────────────────────────┘
+                            │
+┌───────────────────────────▼───────────────────────────────────────────┐
+│                    BACKEND (Node.js + Express)                         │
+│                                                                       │
+│ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐      │
+│ │ Auth Service│ │ Diary       │ │ Mood Check  │ │ Community   │      │
+│ │ (Login/Anon)│ │ Service     │ │ Service     │ │ Service     │      │
+│ └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘      │
+│                  │            │             │             │            │
+│                  └────────────┴─────────────┴─────────────┘            │
+│                           │                                           │
+└───────────────────────────┬───────────────────────────────────────────┘
+                            │
+┌───────────────────────────▼───────────────────────────────────────────┐
+│                       FIREBASE BACKEND SERVICES                        │
+│                                                                       │
+│ ┌────────────┐ ┌───────────────┐ ┌──────────────┐ ┌────────────────┐ │
+│ │ Firestore  │ │ Firebase Auth │ │ Firebase     │ │ Firebase Cloud │ │
+│ │ (NoSQL DB) │ │ (Login/Anon)  │ │ Storage      │ │  Functions     │ │
+│ │User Data,  │ │Secure Access  │ │Files, Images │ │ API Triggers   │ │
+│ │Posts, Diary│ │               │ │Attachments   │ │                │ │
+│ └────────────┘ └───────────────┘ └──────────────┘ └────────────────┘ │
+└───────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────┐
+│                      SUPPORTING & FUTURE SERVICES                     │
+│  ┌───────────────┐  ┌───────────────┐  ┌───────────────┐  ┌──────────┐│
+│  │AI Mood Engine │  │ Telehealth API│  │ Notification  │  │Analytics ││
+│  │ (Future)      │  │ (Future)      │  │ (Firebase)    │  │ (Reports)││
+│  └───────────────┘  └───────────────┘  └───────────────┘  └──────────┘│
+└───────────────────────────────────────────────────────────────────────┘
